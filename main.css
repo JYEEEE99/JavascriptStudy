@@ -86,6 +86,10 @@
     display: none;
     padding: 10px;
   }
+  
+  .form-hide {
+    display: none;
+  }
   .show {
     display: block;
   }
