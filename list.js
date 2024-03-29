@@ -9,8 +9,10 @@ function layout() {
         <img src="https://via.placeholder.com/600" class="w-100">
         <h5>${products[i].title}</h5>
         <p>가격 : ${products[i].price}</p>
+        <button class="buy">구매</button>
       </div>`);
   }
+  buyBtn();
 }
 layout();
 
@@ -21,8 +23,10 @@ function layout2() {
         <img src="https://via.placeholder.com/600" class="w-100">
         <h5>${data[i].title}</h5>
         <p>가격 : ${data[i].price}</p>
+        <button class="buy">구매</button>
       </div>`);
     });
+    buyBtn();
   });
 }
 function layout3() {
@@ -32,8 +36,10 @@ function layout3() {
         <img src="https://via.placeholder.com/600" class="w-100">
         <h5>${data[i].title}</h5>
         <p>가격 : ${data[i].price}</p>
+        <button class="buy">구매</button>
       </div>`);
     });
+    buyBtn();
   });
 }
 var count = 0;
@@ -48,12 +54,15 @@ function moreBtn() {
   });
 }
 moreBtn();
-$("#price").on("click", function () {
-  products.sort(function (a, b) {
-    return a.price - b.price;
+function buyBtn() {
+  $(".buy").on("click", function () {
+    var array = $(this).siblings("h5").text();
+    if (localStorage.getItem("cart") != null) {
+      var newArray = JSON.parse(localStorage.cart);
+      newArray.push(array);
+      localStorage.setItem("cart", JSON.stringify(newArray));
+    } else {
+      localStorage.setItem("cart", JSON.stringify([array]));
+    }
   });
-  $(".row").html("");
-  layout();
-  moreBtn();
-});
-$("#name").on("click", function () {});
+}
